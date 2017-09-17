@@ -12,7 +12,7 @@ var config = {
             exclude: /node_modules/,
             loader: ['babel'], // The module to load. "babel" is short for "babel-loader"
             query: {
-                presets: ['es2015']
+                presets: ['es2015', 'stage-2']
             },
             devtool: "source-map"
         },
@@ -22,7 +22,7 @@ var config = {
                 exclude: /node_modules/,
                 loader: ['babel'], // The module to load. "babel" is short for "babel-loader"
                 query: {
-                    presets: ['react', 'es2015']
+                    presets: ['react', 'es2015', 'stage-2']
                 },
                 "plugins": []
             },

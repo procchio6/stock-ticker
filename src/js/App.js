@@ -1,14 +1,17 @@
 import React from 'react';
 
-import Search from './components/Search'
-import TickerList from './components/TickerList'
+import Graph from './components/Graph';
+import Search from './components/Search';
+import TickerList from './components/TickerList';
+import IntrinioAdapter from './adapters/intrinio_adapter'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       quotes: {},
-      selected: ''
+      selected: '',
+      priceData: {}
     }
   }
 
@@ -25,7 +28,6 @@ export default class App extends React.Component {
     this.ir.onError( (error) => console.log(error) )
 
     this.ir.join("AAPL","GE","MSFT")
-    this.ir.join('lfkajsdfl')
   }
 
   componentWillUnount() {
@@ -52,6 +54,18 @@ export default class App extends React.Component {
   handleSelect = (e) => {
     let ticker = e.currentTarget.id
     this.setState({selected: ticker})
+    this.getPriceData(ticker)
+  }
+
+  getPriceData = (ticker) => {
+    IntrinioAdapter.getPriceData(ticker).then( (resp) => {
+      this.setState({
+        priceData: {
+          ...this.state.priceData,
+          [ticker]: resp.data
+        }
+      })
+    })
   }
 
   render() {
@@ -65,7 +79,10 @@ export default class App extends React.Component {
             <TickerList quotes={this.state.quotes} onSelect={this.handleSelect} selected={this.state.selected}/>
           </div>
           <div className='col-xs-12 col-sm-8 col-md-9'>
-            
+            <h1 style={{textAlign: 'center'}}>
+              {this.state.selected}
+            </h1>
+            <Graph data={this.state.priceData[this.state.selected]} selected={this.state.selected}/>
           </div>
         </div>
       </div>

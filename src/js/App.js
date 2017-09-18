@@ -1,15 +1,15 @@
 import React from 'react';
 
+import Search from './components/Search'
+import TickerList from './components/TickerList'
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quotes: {}
+      quotes: {},
+      selected: ''
     }
-  }
-
-  componentWillMount() {
-    console.log('componentWillMount');
   }
 
   componentDidMount() {
@@ -18,23 +18,22 @@ export default class App extends React.Component {
       provider: "iex"
     })
 
-    this.ir.onQuote(function(quote) {
+    this.ir.onQuote( (quote) => {
       this.handleQuote(quote)
-    }.bind(this))
+    })
+
+    this.ir.onError( (error) => console.log(error) )
 
     this.ir.join("AAPL","GE","MSFT")
+    this.ir.join('lfkajsdfl')
+  }
 
-    this.setState({
-      quotes: {
-        "AAPL": {},
-        "GE": {},
-        "MSFT": {}
-      }
-    })
+  componentWillUnount() {
+    this.ir.destroy()
   }
 
   handleQuote(quote) {
-    console.log(quote);
+    // console.log(quote);
     this.setState({
       quotes: {
         ...this.state.quotes,
@@ -46,17 +45,29 @@ export default class App extends React.Component {
     })
   }
 
+  handleSearch(ticker) {
+    this.ir.join(ticker.toUpperCase())
+  }
+
+  handleSelect = (e) => {
+    let ticker = e.currentTarget.id
+    this.setState({selected: ticker})
+  }
+
   render() {
-    let quotes = this.state.quotes
+    let { quotes } = this.state
+
     return (
-      <div>
-        {
-          Object.keys(quotes).map( (ticker) => {
-            if (quotes[ticker].hasOwnProperty('last')) {
-              return <div key={ticker}>{quotes[ticker].last.price}</div>
-            }
-          })
-        }
+      <div className='container-fluid'>
+        <div className='row'>
+          <div className='col-xs-12 col-sm-4 col-md-3'>
+            <Search onSearch={this.handleSearch.bind(this)} />
+            <TickerList quotes={this.state.quotes} onSelect={this.handleSelect} selected={this.state.selected}/>
+          </div>
+          <div className='col-xs-12 col-sm-8 col-md-9'>
+            
+          </div>
+        </div>
       </div>
     )
   }

@@ -7,7 +7,8 @@
     "test": "./node_modules/.bin/karma start --single-run --browsers Chrome",
     "build-main": "webpack --config webpack.config.js --watch",
     "build": "webpack --config webpack.config.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "npm run build"
   },
   "keywords": [
     "OpenFin"

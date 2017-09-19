@@ -1,0 +1,36 @@
+{
+  "startup_app": {
+    "name": "Openfin Modules",
+    "description": "Openfin Modules Demo",
+    "url": "https://open-stock-ticker.herokuapp.com/",
+    "icon": "http://cdn.openfin.co/demos/hyperblotter/images/hyperblotter_icon.ico",
+    "uuid": "OpenfinModules",
+    "autoShow": true,
+    "defaultWidth": 500,
+    "maxWidth": 600,
+    "minWidth": 300,
+    "maxHeight": 600,
+    "defaultHeight": 500,
+    "minHeight": 300,
+    "defaultTop": 50,
+    "defaultLeft": 50,
+    "resizable": true,
+    "maximizable": true,
+    "frame": false,
+    "alwaysOnTop":false,
+    "cornerRounding": {
+      "width": 0,
+      "height": 0
+    }
+  },
+  "runtime": {
+    "arguments": "",
+    "version": "5.44.9.2"
+  },
+  "shortcut": {
+    "company": "OpenFin",
+    "description": "Module Demo",
+    "icon": "http://cdn.openfin.co/demos/hyperblotter/images/hyperblotter_icon.ico",
+    "name": "Module Demo"
+  }
+}

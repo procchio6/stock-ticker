@@ -31,6 +31,7 @@ export default class App extends React.Component {
   }
 
   componentWillUnount() {
+    this.ir.leaveAll()
     this.ir.destroy()
   }
 

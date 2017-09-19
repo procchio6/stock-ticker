@@ -35,7 +35,7 @@ export default class App extends React.Component {
   }
 
   handleQuote(quote) {
-    // console.log(quote);
+    console.log(quote);
     this.setState({
       quotes: {
         ...this.state.quotes,

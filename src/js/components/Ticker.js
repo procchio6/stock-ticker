@@ -39,7 +39,7 @@ class Ticker extends Component {
         </div>
         {
           this.props.quote.hasOwnProperty('last') &&
-          this.props.quote.last.price.toFixed(2)
+          parseFloat(this.props.quote.last.price).toFixed(2)
         }
       </div>
     )

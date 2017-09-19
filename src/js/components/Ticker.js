@@ -29,6 +29,19 @@ class Ticker extends Component {
     }
   }
 
+  handleRemove = (e) => {
+    e.stopPropagation()
+    this.props.onRemove(this.props.ticker)
+  }
+
+  displayPrice() {
+    if (this.props.quote.hasOwnProperty('last')) {
+      return parseFloat(this.props.quote.last.price).toFixed(2)
+    } else if (this.props.quote.hasOwnProperty('bid')) {
+      return parseFloat(this.props.quote.bid.price).toFixed(2)
+    }
+  }
+
   render() {
     let selected = this.props.selected ? 'selected' : ''
 
@@ -37,10 +50,8 @@ class Ticker extends Component {
         <div>
           <strong>{this.props.ticker}</strong>
         </div>
-        {
-          this.props.quote.hasOwnProperty('last') &&
-          parseFloat(this.props.quote.last.price).toFixed(2)
-        }
+        {this.displayPrice()}
+        <span className='remove-ticker' onClick={this.handleRemove}>X</span>
       </div>
     )
   }

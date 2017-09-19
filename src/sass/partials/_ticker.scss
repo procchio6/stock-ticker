@@ -12,6 +12,7 @@
 
 .ticker:hover {
   background-color: #E6E6E6;
+  cursor: pointer;
 }
 
 .ticker:last-of-type {
@@ -47,4 +48,17 @@
 
 .selected {
   background-color: #E6E6E6;
+}
+
+.remove-ticker {
+  float: right;
+  position: relative;
+  top: -13px;
+  font-weight: bolder;
+  font-size: large;
+}
+
+.remove-ticker:hover {
+  color: #DC3545;
+  cursor: pointer;
 }

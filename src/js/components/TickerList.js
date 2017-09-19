@@ -19,6 +19,7 @@ class TickerList extends Component {
             ticker={ticker}
             quote={quotes[ticker]}
             onSelect={this.props.onSelect}
+            onRemove={this.props.onRemove}
             selected={this.props.selected === ticker}
           />
         ))}

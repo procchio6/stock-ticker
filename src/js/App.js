@@ -58,6 +58,17 @@ export default class App extends React.Component {
     this.getPriceData(ticker)
   }
 
+  handleRemove = (ticker) => {
+    this.ir.leave(ticker)
+    if (this.state.selected === ticker) {
+      this.setState({selected: ''})
+    }
+
+    let quotes = this.state.quotes
+    delete quotes[ticker]
+    this.setState({ quotes })
+  }
+
   getPriceData = (ticker) => {
     IntrinioAdapter.getPriceData(ticker).then( (resp) => {
       this.setState({
@@ -77,7 +88,12 @@ export default class App extends React.Component {
         <div className='row'>
           <div className='col-xs-12 col-sm-4 col-md-3'>
             <Search onSearch={this.handleSearch.bind(this)} />
-            <TickerList quotes={this.state.quotes} onSelect={this.handleSelect} selected={this.state.selected}/>
+            <TickerList
+              quotes={this.state.quotes}
+              onSelect={this.handleSelect}
+              selected={this.state.selected}
+              onRemove={this.handleRemove}
+            />
           </div>
           <div className='col-xs-12 col-sm-8 col-md-9'>
             <h1 style={{textAlign: 'center'}}>
